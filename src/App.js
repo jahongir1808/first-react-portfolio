@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { HomeP, LoginP, RegisterP } from "./pages/front";
+import {
+  Dashboard,
+  Experiences,
+  Messages,
+  Portfolios,
+  Skills,
+} from "./pages/admin";
+import { AdminLayout, FrontLayout } from "./components/layout";
+import "./App.css";
 
 function App() {
+  const frontRoutes = [
+    { url: "", page: HomeP },
+    { url: "login", page: LoginP },
+    { url: "register", page: RegisterP },
+  ];
+
+  const adminRoutes = [
+    { url: "dashboard", page: Dashboard },
+    { url: "experiences", page: Experiences },
+    { url: "messages", page: Messages },
+    { url: "portfolios", page: Portfolios },
+    { url: "skills", page: Skills },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {frontRoutes.map(({ url, page: Page }) => (
+          <Route
+            path={"/" + url}
+            element={
+              <FrontLayout>
+                <Page />
+              </FrontLayout>
+            }
+          />
+        ))}
+      </Routes>
+      <Routes>
+        {adminRoutes.map(({ url, page: Page }) => (
+          <Route
+            path={"/" + url}
+            element={
+              <AdminLayout>
+                <Page />
+              </AdminLayout>
+            }
+          />
+        ))}
+      </Routes>
+    </Router>
   );
 }
 
