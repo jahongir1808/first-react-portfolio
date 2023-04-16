@@ -12,7 +12,7 @@ import portfolioImg9 from "../../../assets/img/portfolio/portfolio-9.jpg";
 import { BiLink, BiPlus } from "react-icons/bi";
 const Portfolio = () => {
   return (
-    <section id="portfolio" class="portfolio section-bg">
+    <section id="portfolio" class="portfolio section-bg section">
       <div class="container">
         <div class="section-title">
           <h2>Portfolio</h2>

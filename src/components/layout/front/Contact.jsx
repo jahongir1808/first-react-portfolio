@@ -4,7 +4,7 @@ import { BsGeoAlt, BsEnvelope, BsPhone } from "react-icons/bs";
 
 const Contact = () => {
   return (
-    <section id="contact" class="contact">
+    <section id="contact" class="contact section">
       <div class="container">
         <div class="section-title">
           <h2>Contact</h2>

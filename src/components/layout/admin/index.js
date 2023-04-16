@@ -1,19 +1,23 @@
+import { Button, Layout, Menu, theme } from "antd";
 import React, { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { Link } from "react-router-dom";
+import { HiOutlineLogout } from "react-icons/hi";
+import { TOKEN } from "../../../const";
+import { adminRoutes } from "../../../const/menus";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import "./admin.scss";
+
 const { Header, Sider, Content } = Layout;
-import "./admin.css ";
+
 const AdminLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const logout = () => {
+    localStorage.removeItem(TOKEN);
+    window.location.href = "/";
+  };
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -21,22 +25,23 @@ const AdminLayout = ({ children }) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["0"]}
           items={[
+            ...adminRoutes.map((route, i) => ({
+              key: i,
+              icon: <Link to={"/" + route.url}>{route.icon}</Link>,
+              label: route.label,
+            })),
             {
-              key: "1",
-              icon: <UserOutlined />,
-              label: "nav 1",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3",
+              icon: (
+                <Button
+                  onClick={logout}
+                  type="primary"
+                  icon={<HiOutlineLogout />}
+                >
+                  Logout
+                </Button>
+              ),
             },
           ]}
         />
@@ -70,5 +75,4 @@ const AdminLayout = ({ children }) => {
     </Layout>
   );
 };
-
 export default AdminLayout;

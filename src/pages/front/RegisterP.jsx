@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./Register.scss";
-import { sendData } from "../../const/common";
-import { TOKEN } from "../../const";
+import { sendData } from "../../server/common";
+import { TOKEN, USER } from "../../const";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,16 +13,12 @@ const RegisterP = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (value) => {
-    sendData("auth/register", value)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem(TOKEN, res.data.token);
-        toast.success("Welcome! You have successfully");
-        window.location.href = "/";
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    sendData("auth/register", value).then((res) => {
+      localStorage.setItem(TOKEN, res.data.token);
+      localStorage.setItem(USER, JSON.stringify(res.data.user));
+      toast.success("Welcome! You have successfully");
+      window.location.href = "/login";
+    });
   };
   return (
     <div id="register">

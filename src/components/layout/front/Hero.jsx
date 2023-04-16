@@ -28,7 +28,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      class="d-flex flex-column justify-content-center align-items-center"
+      class="section d-flex flex-column justify-content-center align-items-center"
     >
       <div class="hero-container" data-aos="fade-in">
         <h1>Alex Smith</h1>

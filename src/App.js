@@ -1,22 +1,20 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { HomeP, LoginP, RegisterP } from "./pages/front";
-import {
-  Dashboard,
-  Experiences,
-  Messages,
-  Portfolios,
-  Skills,
-} from "./pages/admin";
+
 import { AdminLayout, FrontLayout } from "./components/layout";
 import { NavLink } from "react-router-dom";
 import { FiLogIn, FiHome } from "react-icons/fi";
 import { FaRegRegistered } from "react-icons/fa";
-import "./App.css";
 import { ToastContainer } from "react-toastify";
 import { TOKEN } from "./const";
 import NotFound from "./pages/front/NotFound";
+import "./App.css";
+import { adminRoutes } from "./const/menus";
+import { ROLE } from "./utils";
 
-const token = localStorage.getItem(TOKEN);
+const isAuthorized =
+  localStorage.getItem(TOKEN) &&
+  ROLE !== "user";
 
 function App() {
   const frontRoutes = [
@@ -24,15 +22,6 @@ function App() {
     { url: "login", page: LoginP },
     { url: "register", page: RegisterP },
   ];
-
-  const adminRoutes = [
-    { url: "dashboard", page: Dashboard },
-    { url: "experiences", page: Experiences },
-    { url: "messages", page: Messages },
-    { url: "portfolios", page: Portfolios },
-    { url: "skills", page: Skills },
-  ];
-
   return (
     <Router>
       <ToastContainer />
@@ -68,7 +57,7 @@ function App() {
         ))}
       </Routes>
       <Routes>
-        {token &&
+        {isAuthorized &&
           adminRoutes.map(({ url, page: Page }) => (
             <Route
               path={"/" + url}
@@ -79,8 +68,8 @@ function App() {
               }
             />
           ))}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      <Route path="*" element={<NotFound />} />
     </Router>
   );
 }

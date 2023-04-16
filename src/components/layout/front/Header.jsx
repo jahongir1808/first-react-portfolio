@@ -12,7 +12,6 @@ import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { BiUser, BiServer } from "react-icons/bi";
 import { TbNotebook } from "react-icons/tb";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (

@@ -6,61 +6,80 @@ import { ExclamationCircleFilled } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import { FaUserEdit } from "react-icons/fa";
 import { AiOutlineUserDelete, AiOutlineUserAdd } from "react-icons/ai";
-import { ROLE, USER_ID } from "../../utils";
+import { Tabs } from "antd";
 import { useFetch } from "../../hook";
 
 const { confirm } = Modal;
 
-const Experiences = () => {
+const Users = () => {
+  const [activeTab, setActiveTab] = useState("1");
   const columns = [
     {
-      title: "Work Name",
-      dataIndex: "workName",
-      key: "workName",
+      title: "First Name",
+      dataIndex: "firstName",
+      key: "firstName",
     },
     {
-      title: "Company Name",
-      dataIndex: "companyName",
-      key: "companName",
+      title: "Last Name",
+      dataIndex: "lastName",
+      key: "lastName",
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
     },
     {
-      title: "Start Date",
-      dataIndex: "startDate",
-      key: "startDate",
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
     {
-      title: "End Date",
-      dataIndex: "endDate",
-      key: "endDate",
+      title: "Client",
+      dataIndex: "client",
+      render: (client) => (client ? "Ha" : "Yo'q"),
     },
     {
       title: "Actions",
       width: 200,
-      render: ({ _id }) => (
-        <>
-          <Button type="primary">
-            <FaUserEdit />
-          </Button>
-          <Button type="primary" danger>
-            <AiOutlineUserDelete />
-          </Button>
-        </>
-      ),
+      render: ({ _id }) =>
+        activeTab === "1" ? (
+          <>
+            <Button type="primary" onClick={() => editUser(_id)}>
+              <FaUserEdit />
+            </Button>
+            <Button type="primary" danger onClick={() => deleteUser(_id)}>
+              <AiOutlineUserDelete />
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button type="primary" onClick={() => confirmClient(_id)}>
+              Confirm
+            </Button>
+            <Button type="primary" onClick={() => rejectClient(_id)}>
+              Reject
+            </Button>
+          </>
+        ),
     },
   ];
   const [form] = Form.useForm();
+  const [current, setCurrentPage] = useState(1);
   const {
-    data: experiences,
+    data: users,
     loading,
-    recall: getExperiences,
-  } = useFetch(`experiences${ROLE === "client" ? `?user[in]=${USER_ID}` : ""}`);
+    recall: getUsers,
+    total,
+  } = useFetch(`users?page=${current}&limit=5`);
+  const {
+    data: noConfirmedUsers,
+    loading: loading2,
+    recall: getConfirmedUsers,
+  } = useFetch("users?client[in]=true&role[in]=user");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -71,12 +90,12 @@ const Experiences = () => {
       if (selected) {
         values.password || delete values.password;
         putData(`users/${selected}`, values).then((data) => {
-          getExperiences();
+          getUsers();
           setIsModalOpen(false);
         });
       } else {
         sendData("users", values).then((res) => {
-          getExperiences();
+          getUsers();
           setIsModalOpen(false);
         });
       }
@@ -111,38 +130,95 @@ const Experiences = () => {
       onOk() {
         deleteData(`users/${id}`).then((res) => {
           toast.success(`User ${id} deleted successfully !`);
-          getExperiences();
+          getUsers();
         });
       },
     });
   }
 
+  const onChangeTab = (key) => {
+    setActiveTab(key);
+  };
+  const Tab1 = (
+    <Table
+      title={() => (
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <h1>User</h1>
+          <Button
+            style={{ display: "flex", alignItems: "center", gap: "5px" }}
+            onClick={openFormModal}
+            type="primary"
+          >
+            <AiOutlineUserAdd /> Add User
+          </Button>
+        </div>
+      )}
+      dataSource={users}
+      columns={columns}
+      loading={loading}
+      scroll={{ x: 600 }}
+      pagination={{
+        current,
+        total,
+        pageSize: 5,
+        onChange: (key) => setCurrentPage(key),
+      }}
+    />
+  );
+  const Tab2 = (
+    <Table
+      dataSource={noConfirmedUsers}
+      columns={columns}
+      loading={loading2}
+      scroll={{ x: 600 }}
+    />
+  );
+  const items = [
+    {
+      key: "1",
+      label: `All Users`,
+      children: Tab1,
+    },
+    {
+      key: "2",
+      label: `No-confirm clients`,
+      children: Tab2,
+    },
+  ];
+  const confirmClient = (id) => {
+    confirm({
+      title: "Do you Want to confirm these items?",
+      icon: <ExclamationCircleFilled />,
+      content: "Some descriptions",
+      onOk() {
+        putData(`users/${id}`, { role: "client" }).then(() => {
+          getConfirmedUsers();
+        });
+      },
+    });
+  };
+  const rejectClient = (id) => {
+    confirm({
+      title: "Do you Want to reject these items?",
+      icon: <ExclamationCircleFilled />,
+      content: "Some descriptions",
+      onOk() {
+        putData(`users/${id}`, { client: false }).then(() => {
+          getConfirmedUsers();
+          getUsers();
+        });
+      },
+    });
+  };
   return (
     <>
-      <Table
-        title={() => (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h1>User</h1>
-            <Button
-              style={{ display: "flex", alignItems: "center", gap: "5px" }}
-              onClick={openFormModal}
-              type="primary"
-            >
-              <AiOutlineUserAdd /> Add User
-            </Button>
-          </div>
-        )}
-        dataSource={experiences}
-        columns={columns}
-        loading={loading}
-        scroll={{ x: 600 }}
-      />
+      <Tabs ActiveKey={selected} items={items} onChange={onChangeTab} />
       <Modal
         title="User"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText={selected ? "Save Experiences" : "Add Experiences"}
+        okText={selected ? "Save User" : "Add User"}
       >
         <Form
           labelCol={{ span: 24 }}
@@ -255,4 +331,4 @@ const Experiences = () => {
   );
 };
 
-export default Experiences;
+export default Users;

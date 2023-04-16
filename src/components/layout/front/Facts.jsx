@@ -36,7 +36,7 @@ const Facts = () => {
     });
   }, []);
   return (
-    <section id="facts" class="facts">
+    <section id="facts" class="facts section">
       <div class="container">
         <div class="section-title">
           <h2>Facts</h2>

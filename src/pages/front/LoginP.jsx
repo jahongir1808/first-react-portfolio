@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import "./Login.scss";
-import { sendData } from "../../const/common";
-import { TOKEN } from "../../const";
+import { sendData } from "../../server/common";
+import { TOKEN, USER } from "../../const";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -17,8 +17,14 @@ const LoginP = () => {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem(TOKEN, res.data.token);
-        toast.success("Welcome! You have successfully");
-        window.location.href = "/dashboard";
+        localStorage.setItem(USER, JSON.stringify(res.data.user));
+        console.log(res.data.user);
+        if (res.data.user.role !== "user") {
+          window.location.href = "/dashboard";
+          toast.success("Welcome! You have successfully");
+        } else {
+          toast.info("You must verify yourself as a client !");
+        }
       })
       .catch((err) => {
         toast.error("Username or password incorrect !");
