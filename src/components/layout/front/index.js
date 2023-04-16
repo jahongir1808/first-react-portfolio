@@ -7,11 +7,11 @@ import Facts from "./Facts";
 import Resume from "./Resume";
 import Portfolio from "./Portfolio";
 import Services from "./Services";
-import Testemonials from "./Testemonials";
 import Contact from "./Contact";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "./Header.css";
+import Testemonials from "./Testemonials";
 const FrontLayout = ({ children }) => {
   useEffect(() => {
     AOS.init();
