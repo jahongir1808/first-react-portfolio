@@ -14,7 +14,7 @@ const LoginP = () => {
   } = useForm();
   const onSubmit = (value) => {
     sendData("auth/login", value)
-    .then((res) => {
+      .then((res) => {
         console.log(res.data);
         localStorage.setItem(TOKEN, res.data.token);
         toast.success("Welcome! You have successfully");
