@@ -10,7 +10,6 @@ const Hero = () => {
     const typed = new Typed(el.current, {
       strings: [
         "Designer",
-        "Jahongir",
         "Developer",
         "Freelancer",
         "Photographer",
