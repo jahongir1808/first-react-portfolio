@@ -12,6 +12,11 @@ import { NavLink } from "react-router-dom";
 import { FiLogIn, FiHome } from "react-icons/fi";
 import { FaRegRegistered } from "react-icons/fa";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import { TOKEN } from "./const";
+import NotFound from "./pages/front/NotFound";
+
+const token = localStorage.getItem(TOKEN);
 
 function App() {
   const frontRoutes = [
@@ -30,6 +35,7 @@ function App() {
 
   return (
     <Router>
+      <ToastContainer />
       <div
         className="links"
         style={{ display: "flex", justifyContent: "center" }}
@@ -62,16 +68,17 @@ function App() {
         ))}
       </Routes>
       <Routes>
-        {adminRoutes.map(({ url, page: Page }) => (
-          <Route
-            path={"/" + url}
-            element={
-              <AdminLayout>
-                <Page />
-              </AdminLayout>
-            }
-          />
-        ))}
+        {token &&
+          adminRoutes.map(({ url, page: Page }) => (
+            <Route
+              path={"/" + url}
+              element={
+                <AdminLayout>
+                  <Page />
+                </AdminLayout>
+              }
+            />
+          ))}
       </Routes>
     </Router>
   );
