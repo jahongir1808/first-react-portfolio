@@ -92,3 +92,28 @@ section {
 .section-title p {
   margin-bottom: 0;
 }
+
+.links {
+  padding: 10px;
+  display: flex;
+  gap: 20px;
+  position: fixed;
+  top: 5px;
+  right: 10px;
+  z-index: 2;
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255, 0.7);
+}
+
+.links a {
+  font-weight: 700;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.links .active {
+  color: rgb(255, 0, 0, 0.5);
+  text-decoration: underline;
+  padding-bottom: 5px;
+}

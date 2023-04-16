@@ -8,6 +8,9 @@ import {
   Skills,
 } from "./pages/admin";
 import { AdminLayout, FrontLayout } from "./components/layout";
+import { NavLink } from "react-router-dom";
+import { FiLogIn, FiHome } from "react-icons/fi";
+import { FaRegRegistered } from "react-icons/fa";
 import "./App.css";
 
 function App() {
@@ -27,6 +30,25 @@ function App() {
 
   return (
     <Router>
+      <div
+        className="links"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <NavLink to="/login">
+          <i>
+            <FiLogIn />
+          </i>
+          Login
+        </NavLink>
+        <NavLink to="/register">
+          <FaRegRegistered />
+          Register
+        </NavLink>
+        <NavLink to="/">
+          <FiHome />
+          Home
+        </NavLink>
+      </div>
       <Routes>
         {frontRoutes.map(({ url, page: Page }) => (
           <Route

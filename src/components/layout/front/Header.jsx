@@ -11,8 +11,8 @@ import {
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { BiUser, BiServer } from "react-icons/bi";
 import { TbNotebook } from "react-icons/tb";
-import { NavLink } from "react-bootstrap";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -56,52 +56,52 @@ const Header = () => {
           <nav id="navbar" className="nav-menu navbar">
             <ul>
               <li>
-                <NavLink href="#hero" className="nav-link scrollto active">
+                <a href="#hero" className="nav-link scrollto active">
                   <i>
                     <AiOutlineHome />
                   </i>
                   <span>Home</span>
-                </NavLink>
+                </a>
               </li>
               <li>
-                <NavLink href="#about" className="nav-link scrollto">
+                <a href="#about" className="nav-link scrollto">
                   <i>
                     <BiUser />
                   </i>
                   <span>About</span>
-                </NavLink>
+                </a>
               </li>
               <li>
-                <NavLink href="#resume" className="nav-link scrollto">
+                <a href="#resume" className="nav-link scrollto">
                   <i>
                     <AiOutlineFile />
                   </i>
                   <span>Resume</span>
-                </NavLink>
+                </a>
               </li>
               <li>
-                <NavLink href="#portfolio" className="nav-link scrollto">
+                <a href="#portfolio" className="nav-link scrollto">
                   <i>
                     <TbNotebook />
                   </i>
                   <span>Portfolio</span>
-                </NavLink>
+                </a>
               </li>
               <li>
-                <NavLink href="#services" className="nav-link scrollto">
+                <a href="#services" className="nav-link scrollto">
                   <i>
                     <BiServer />
                   </i>
                   <span>Services</span>
-                </NavLink>
+                </a>
               </li>
               <li>
-                <NavLink href="#contact" className="nav-link scrollto">
+                <a href="#contact" className="nav-link scrollto">
                   <i>
                     <AiOutlineMail />
                   </i>
                   <span>Contact</span>
-                </NavLink>
+                </a>
               </li>
             </ul>
           </nav>
