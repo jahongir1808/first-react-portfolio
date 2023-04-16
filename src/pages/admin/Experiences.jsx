@@ -30,13 +30,21 @@ const Experiences = () => {
     },
     {
       title: "Start Date",
-      dataIndex: "startDate",
+      dataIndex: `startDate`,
       key: "startDate",
+      render: (startDate) => {
+        startDate = startDate.split("T");
+        return startDate[0];
+      },
     },
     {
       title: "End Date",
       dataIndex: "endDate",
       key: "endDate",
+      render: (endDate) => {
+        endDate = endDate.split("T");
+        return endDate[0];
+      },
     },
     {
       title: "Actions",
