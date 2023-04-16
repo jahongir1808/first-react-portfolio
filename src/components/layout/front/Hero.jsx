@@ -8,7 +8,13 @@ const Hero = () => {
 
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: ["Designer", "Developer", "Freelancer", "Photographer"],
+      strings: [
+        "Designer",
+        "Jahongir",
+        "Developer",
+        "Freelancer",
+        "Photographer",
+      ],
       startDelay: 300,
       typeSpeed: 100,
       backSpeed: 100,
@@ -27,10 +33,9 @@ const Hero = () => {
     >
       <div class="hero-container" data-aos="fade-in">
         <h1>Alex Smith</h1>
-          <p>
-            I'm{" "}
-            <span ref={el}></span>
-          </p>
+        <p>
+          I'm <span ref={el}></span>
+        </p>
       </div>
     </section>
   );
