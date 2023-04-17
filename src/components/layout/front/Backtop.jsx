@@ -6,7 +6,7 @@ const Backtop = () => {
 
   useEffect(() => {
     function handleScroll() {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 150) {
         setShowButton(true);
       } else {
         setShowButton(false);
