@@ -33,9 +33,10 @@ const LoginP = () => {
   return (
     <div id="login">
       <div className="login">
-        <h1>Login</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <h1>Login</h1>
           <div className="txtField">
+            <label htmlFor="username">Username</label>
             <input
               {...register("username", { required: "Please enter username !" })}
               type="text"
@@ -44,6 +45,7 @@ const LoginP = () => {
             <span>{errors.userName?.message}</span>
           </div>
           <div className="txtField">
+            <label htmlFor="password">Password</label>
             <input
               {...register("password", { required: "Please enter password !" })}
               type="password"

@@ -4,14 +4,14 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <footer id="footer">
-      <div class="container">
-        <div class="copyright">
+      <div className="container">
+        <div className="copyright">
           &copy; Copyright{" "}
           <strong>
             <span>iPortfolio</span>
           </strong>
         </div>
-        <div class="credits">
+        <div className="credits">
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
       </div>

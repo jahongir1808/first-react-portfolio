@@ -12,9 +12,7 @@ import "./App.css";
 import { adminRoutes } from "./const/menus";
 import { ROLE } from "./utils";
 
-const isAuthorized =
-  localStorage.getItem(TOKEN) &&
-  ROLE !== "user";
+const isAuthorized = localStorage.getItem(TOKEN) && ROLE !== "user";
 
 function App() {
   const frontRoutes = [
@@ -45,8 +43,9 @@ function App() {
         </NavLink>
       </div>
       <Routes>
-        {frontRoutes.map(({ url, page: Page }) => (
+        {frontRoutes.map(({ url, page: Page }, i) => (
           <Route
+            key={i}
             path={"/" + url}
             element={
               <FrontLayout>
@@ -58,8 +57,9 @@ function App() {
       </Routes>
       <Routes>
         {isAuthorized &&
-          adminRoutes.map(({ url, page: Page }) => (
+          adminRoutes.map(({ url, page: Page }, i) => (
             <Route
+              key={i}
               path={"/" + url}
               element={
                 <AdminLayout>

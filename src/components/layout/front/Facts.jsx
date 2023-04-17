@@ -36,9 +36,9 @@ const Facts = () => {
     });
   }, []);
   return (
-    <section id="facts" class="facts section">
-      <div class="container">
-        <div class="section-title">
+    <section id="facts" className="facts section">
+      <div className="container">
+        <div className="section-title">
           <h2>Facts</h2>
           <p>
             Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
@@ -48,16 +48,16 @@ const Facts = () => {
           </p>
         </div>
 
-        <div class="row no-gutters">
+        <div className="row no-gutters">
           <div
-            class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
+            className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
             data-aos="fade-up"
           >
-            <div class="count-box">
+            <div className="count-box">
               <i>
                 <BsEmojiSmile />
               </i>
-              <span class="counterSmile">0</span>
+              <span className="counterSmile">0</span>
               <p>
                 <strong>Happy Clients</strong> consequuntur quae
               </p>
@@ -65,15 +65,15 @@ const Facts = () => {
           </div>
 
           <div
-            class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
+            className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
             data-aos="fade-up"
             data-aos-delay="100"
           >
-            <div class="count-box">
+            <div className="count-box">
               <i>
                 <BsJournalRichtext />
               </i>
-              <span class="counterJournal">0</span>
+              <span className="counterJournal">0</span>
               <p>
                 <strong>Projects</strong> adipisci atque cum quia aut
               </p>
@@ -81,15 +81,15 @@ const Facts = () => {
           </div>
 
           <div
-            class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
+            className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            <div class="count-box">
+            <div className="count-box">
               <i>
                 <BsHeadset />
               </i>
-              <span class="counterHeadset">0</span>
+              <span className="counterHeadset">0</span>
               <p>
                 <strong>Hours Of Support</strong> aut commodi quaerat
               </p>
@@ -97,11 +97,11 @@ const Facts = () => {
           </div>
 
           <div
-            class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
+            className="col-lg-3 col-md-6 d-md-flex align-items-md-stretch"
             data-aos="fade-up"
             data-aos-delay="300"
           >
-            <div class="count-box">
+            <div className="count-box">
               <i>
                 <BsPeople />
               </i>
