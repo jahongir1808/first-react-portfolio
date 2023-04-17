@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import sideImg from "../../../assets/img/profile-img.jpg";
 import {
   AiOutlineTwitter,
@@ -14,8 +14,23 @@ import { TbNotebook } from "react-icons/tb";
 import "./Header.css";
 
 const Header = () => {
+  const [activeNav, setActiveNav] = useState(false);
+  const showNav = () => {
+    setActiveNav(!activeNav);
+  };
+  const closeNav = () => {};
   return (
-    <>
+    <div
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
+      data-aos-delay="0"
+      className={activeNav ? "mobile-nav-active" : ""}
+    >
+      <div
+        id="toggle"
+        className={activeNav ? "active" : ""}
+        onClick={showNav}
+      ></div>
       <header id="header">
         <div className="d-flex flex-column">
           <div className="profile">
@@ -106,7 +121,7 @@ const Header = () => {
           </nav>
         </div>
       </header>
-    </>
+    </div>
   );
 };
 

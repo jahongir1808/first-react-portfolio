@@ -160,41 +160,41 @@ const Experiences = () => {
           initialValues={{ role: "client" }}
         >
           <Form.Item
-            name="firstName"
-            label="First Name"
+            name="workName"
+            label="Work Name"
             rules={[
               {
-                message: "The input is not valid First Name!",
+                message: "The input is not valid Work Name!",
               },
               {
                 required: true,
-                message: "Please input your Last Name!",
+                message: "Please input your Work Name!",
               },
             ]}
           >
-            <Input placeholder="First Name" />
+            <Input placeholder="Work Name" />
           </Form.Item>
           <Form.Item
-            name="lastName"
-            label="Last Name"
+            name="companyName"
+            label="Company Name"
             rules={[
               {
-                message: "The input is not valid Last Name!",
+                message: "The input is not valid Company Name!",
               },
               {
                 required: true,
-                message: "Please input your Last Name!",
+                message: "Please input your Company Name!",
               },
             ]}
           >
-            <Input placeholder="Last Name" />
+            <Input placeholder="Company Name" />
           </Form.Item>
           <Form.Item
-            name="username"
-            label="User Name"
+            name="description"
+            label="Description"
             rules={[
               {
-                message: "The input is not valid User Name!",
+                message: "The input is not valid description!",
               },
               {
                 required: true,
@@ -202,7 +202,7 @@ const Experiences = () => {
               },
             ]}
           >
-            <Input placeholder="User Name" />
+            <Input placeholder="Description" />
           </Form.Item>
           <Form.Item
             name="role"

@@ -58,16 +58,16 @@
   color: #fff;
   text-decoration: none;
 }
-
-#main {
-  margin-left: 300px;
+@media (min-width: 1199px) {
+  #main {
+    margin-left: 300px;
+  }
 }
 
 @media (max-width: 1199px) {
   #header {
     left: -300px;
   }
-
   #main {
     margin-left: 0;
   }
@@ -153,4 +153,68 @@
 
 .mobile-nav-active #header {
   left: 0;
+}
+
+#toggle {
+  position: fixed;
+  right: 15px;
+  top: 15px;
+  z-index: 9998;
+  width: 40px;
+  height: 40px;
+  background-color: #149ddd;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none !important;
+}
+
+@media (max-width: 1199px) {
+  #toggle {
+    display: flex !important;
+  }
+}
+
+#toggle::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  transform: translateY(-5px);
+  transition: 0.3s;
+  display: none !important;
+}
+@media (max-width: 1199px) {
+  #toggle::before {
+    display: block !important;
+  }
+}
+
+#toggle::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  transform: translateY(5px);
+  transition: 0.3s;
+}
+
+#toggle::before::-webkit-scrollbar {
+  width: 0;
+}
+
+#toggle::after::-webkit-scrollbar {
+  width: 0;
+}
+
+#toggle.active::after {
+  transform: translateY(0px) rotate(45deg);
+}
+
+#toggle.active::before {
+  transform: translateY(0px) rotate(-45deg);
 }
