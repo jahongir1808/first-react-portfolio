@@ -68,8 +68,8 @@ h6 {
   display: flex;
   gap: 20px;
   position: fixed;
-  top: 5px;
-  left: 20px;
+  top: 12px;
+  left: 12px;
   z-index: 2;
   border-radius: 10px;
   background: #040b14;
@@ -84,10 +84,8 @@ h6 {
   }
 }
 
-@media (max-width: 400px) {
-  .links {
-    flex-direction: column !important;
-  }
+.links svg {
+  font-size: 22px;
 }
 
 .links a {
@@ -96,6 +94,7 @@ h6 {
   gap: 5px;
   align-items: center;
   color: #a8a9b4;
+  transition: 0.3s;
 }
 
 .links .active {
@@ -112,4 +111,17 @@ h6 {
 
 body::-webkit-scrollbar {
   width: 0;
+}
+
+@media (max-width: 400px) {
+  .links {
+    gap: 10px;
+  }
+  .links a {
+    font-size: 14px;
+  }
+  .links svg,
+  .links .active svg {
+    font-size: 13px;
+  }
 }
