@@ -33,7 +33,7 @@ const LoginP = () => {
   return (
     <div id="login">
       <div className="login">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <h1>Login</h1>
           <div className="txtField">
             <label htmlFor="username">Username</label>

@@ -23,7 +23,7 @@ const RegisterP = () => {
   return (
     <div id="register">
       <div className="register">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <h1>Register</h1>
           <div className="inputs">
             <div className="textField">

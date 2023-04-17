@@ -70,7 +70,7 @@
       background-color: #e9ecef;
     }
   }
-  form {
+  .form {
     height: 520px !important;
     width: 400px;
     background-color: rgba(255, 255, 255, 0.13);
@@ -141,7 +141,7 @@
   }
 }
 
-form {
+.form {
   @media (max-width: 450px) {
     height: 450px;
     width: 300px !important;
