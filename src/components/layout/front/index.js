@@ -12,6 +12,7 @@ export { default as Services } from "./Services";
 export { default as Testemonials } from "./Testemonials";
 export { default as Contact } from "./Contact";
 export { default as Footer } from "./Footer";
+export { default as Backtop } from "./Backtop";
 
 const FrontLayout = ({ children }) => {
   useEffect(() => {

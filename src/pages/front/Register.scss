@@ -21,6 +21,8 @@
     }
   }
   .ckeckboxx {
+    display: flex;
+    gap: 50px;
     .custom-checkbox {
       position: absolute;
       z-index: 1;
