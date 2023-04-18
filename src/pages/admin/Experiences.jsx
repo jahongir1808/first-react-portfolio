@@ -1,14 +1,12 @@
-import { Button, Form, Input, Modal, Select, Table } from "antd";
+import { Button, Form, Input, Modal, Table } from "antd";
 import React, { useState } from "react";
 import { deleteData, getData, putData, sendData } from "../../server/common";
-import { USER_ROLES } from "../../const";
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import { FaUserEdit } from "react-icons/fa";
 import { AiOutlineUserDelete, AiOutlineUserAdd } from "react-icons/ai";
 import { ROLE, USER_ID } from "../../utils";
 import { useFetch } from "../../hook";
-
 const { confirm } = Modal;
 
 const Experiences = () => {
@@ -51,10 +49,10 @@ const Experiences = () => {
       width: 200,
       render: ({ _id }) => (
         <>
-          <Button type="primary">
+          <Button onClick={() => editExperiences(_id)} type="primary">
             <FaUserEdit />
           </Button>
-          <Button type="primary" danger>
+          <Button onClick={() => deleteExperience(_id)} type="primary" danger>
             <AiOutlineUserDelete />
           </Button>
         </>
@@ -62,28 +60,28 @@ const Experiences = () => {
     },
   ];
   const [form] = Form.useForm();
+  const [current, setCurrentPage] = useState(1);
   const {
     data: experiences,
     loading,
     recall: getExperiences,
+    total,
   } = useFetch(`experiences${ROLE === "client" ? `?user[in]=${USER_ID}` : ""}`);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const showModal = () => {
     setIsModalOpen(true);
   };
-
   const handleOk = () => {
     form.validateFields().then((values) => {
-      delete values.confirm;
       if (selected) {
-        values.password || delete values.password;
-        putData(`users/${selected}`, values).then((data) => {
+        putData(`experiences/${selected}`, values).then((data) => {
+          console.log(data);
           getExperiences();
           setIsModalOpen(false);
         });
       } else {
-        sendData("users", values).then((res) => {
+        sendData("experiences", values).then((res) => {
           getExperiences();
           setIsModalOpen(false);
         });
@@ -101,23 +99,23 @@ const Experiences = () => {
     form.resetFields();
   };
 
-  function editUser(id) {
+  function editExperiences(id) {
     showModal();
     setSelected(id);
-    getData(`users/${id}`).then((res) => {
+    getData(`experiences/${id}`).then((res) => {
       console.log(res);
       form.setFieldsValue(res.data);
     });
   }
 
-  function deleteUser(id) {
+  function deleteExperience(id) {
     console.log(id);
     confirm({
       title: "Do you Want to delete these items?",
       icon: <ExclamationCircleFilled />,
       content: "Some descriptions",
       onOk() {
-        deleteData(`users/${id}`).then((res) => {
+        deleteData(`experiences/${id}`).then((res) => {
           toast.success(`User ${id} deleted successfully !`);
           getExperiences();
         });
@@ -130,13 +128,13 @@ const Experiences = () => {
       <Table
         title={() => (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <h1>User</h1>
+            <h1>Experiences</h1>
             <Button
               style={{ display: "flex", alignItems: "center", gap: "5px" }}
               onClick={openFormModal}
               type="primary"
             >
-              <AiOutlineUserAdd /> Add User
+              <AiOutlineUserAdd /> Add Experiences
             </Button>
           </div>
         )}
@@ -144,6 +142,12 @@ const Experiences = () => {
         columns={columns}
         loading={loading}
         scroll={{ x: 600 }}
+        pagination={{
+          current,
+          total,
+          pageSize: 5,
+          onChange: (key) => setCurrentPage(key),
+        }}
       />
       <Modal
         title="User"
@@ -205,57 +209,34 @@ const Experiences = () => {
             <Input placeholder="Description" />
           </Form.Item>
           <Form.Item
-            name="role"
-            label="Role"
+            name="startDate"
+            label="startDate"
             rules={[
               {
-                required: true,
-                message: "Please input your role !",
+                message: "The input is not valid startDate!",
+              },
+              {
+                required: false,
+                message: "Please input your startDate!",
               },
             ]}
           >
-            <Select
-              options={USER_ROLES.map((role) => ({ label: role, value: role }))}
-            />
+            <Input placeholder="startDate" />
           </Form.Item>
           <Form.Item
-            name="password"
-            label="Password"
+            name="endDate"
+            label="endDate"
             rules={[
               {
-                required: selected ? false : true,
-                message: "Please input your password!",
+                message: "The input is not valid description!",
               },
-            ]}
-            hasFeedback
-          >
-            <Input.Password placeholder="Password" />
-          </Form.Item>
-          <Form.Item
-            name="confirm"
-            label="Confirm Password"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
               {
-                required: selected ? false : true,
-                message: "Please confirm your password!",
+                required: false,
+                message: "Please input your User Name!",
               },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
-                },
-              }),
             ]}
           >
-            <Input.Password placeholder="Confirm Password" />
+            <Input placeholder="endDate" />
           </Form.Item>
         </Form>
       </Modal>

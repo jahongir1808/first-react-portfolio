@@ -5,6 +5,7 @@ import { sendData } from "../../server/common";
 import { TOKEN, USER } from "../../const";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Links from "./Links";
 
 const RegisterP = () => {
   const {
@@ -22,6 +23,7 @@ const RegisterP = () => {
   };
   return (
     <div id="register">
+      <Links />
       <div className="register">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
           <h1>Register</h1>

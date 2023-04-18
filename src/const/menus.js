@@ -6,44 +6,48 @@ import {
   Skills,
   Users,
 } from "../pages/admin";
-import { UserOutlined } from "@ant-design/icons";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
+import { GrUserSettings } from "react-icons/gr";
+import { BsDiagram3Fill, BsJournalPlus } from "react-icons/bs";
+import { TbMessages } from "react-icons/tb";
+import { GiSkills } from "react-icons/gi";
 import { ROLE } from "../utils";
 
 const routes = [
   {
     url: "dashboard",
     page: Dashboard,
-    icon: <UserOutlined />,
+    icon: <MdOutlineDashboardCustomize />,
     label: "Dashboard",
   },
   {
     url: "users",
     page: Users,
-    icon: <UserOutlined />,
+    icon: <GrUserSettings />,
     label: "Users",
   },
   {
     url: "experiences",
     page: Experiences,
-    icon: <UserOutlined />,
+    icon: <BsDiagram3Fill />,
     label: "Experiences",
   },
   {
     url: "messages",
     page: Messages,
-    icon: <UserOutlined />,
+    icon: <TbMessages />,
     label: "Messages",
   },
   {
     url: "portfolios",
     page: Portfolios,
-    icon: <UserOutlined />,
+    icon: <BsJournalPlus />,
     label: "Portfolios",
   },
   {
     url: "skills",
     page: Skills,
-    icon: <UserOutlined />,
+    icon: <GiSkills />,
     label: "Skills",
   },
 ];
