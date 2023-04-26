@@ -42,13 +42,17 @@ const Users = () => {
     {
       title: "Actions",
       width: 200,
-      render: ({ _id }) =>
+      render: ({ _id, username }) =>
         activeTab === "1" ? (
           <>
             <Button type="primary" onClick={() => editUser(_id)}>
               <FaUserEdit />
             </Button>
-            <Button type="primary" danger onClick={() => deleteUser(_id)}>
+            <Button
+              type="primary"
+              danger
+              onClick={() => deleteUser(_id, username)}
+            >
               <AiOutlineUserDelete />
             </Button>
           </>
@@ -121,7 +125,7 @@ const Users = () => {
     });
   }
 
-  function deleteUser(id) {
+  function deleteUser(id, username) {
     console.log(id);
     confirm({
       title: "Do you Want to delete these items?",
@@ -129,7 +133,7 @@ const Users = () => {
       content: "Some descriptions",
       onOk() {
         deleteData(`users/${id}`).then((res) => {
-          toast.success(`User ${id} deleted successfully !`);
+          toast.success(`User ${username} deleted successfully !`);
           getUsers();
         });
       },

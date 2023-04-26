@@ -18,7 +18,7 @@ function App() {
   ];
   return (
     <Router>
-      <ToastContainer />
+      <ToastContainer autoClose={500} />
       <Routes>
         {frontRoutes.map(({ url, page: Page }, i) => (
           <Route
