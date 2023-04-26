@@ -19,7 +19,7 @@ const Experiences = () => {
     {
       title: "Company Name",
       dataIndex: "companyName",
-      key: "companName",
+      key: "companyName",
     },
     {
       title: "Description",
