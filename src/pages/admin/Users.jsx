@@ -219,7 +219,7 @@ const Users = () => {
       <Tabs ActiveKey={selected} items={items} onChange={onChangeTab} />
       <Modal
         title="User"
-        open={isModalOpen}
+        open={isModalOpen}  
         onOk={handleOk}
         onCancel={handleCancel}
         okText={selected ? "Save User" : "Add User"}

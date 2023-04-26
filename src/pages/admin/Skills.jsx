@@ -138,7 +138,6 @@ const Skills = () => {
           wrapperCol={{ span: 24 }}
           form={form}
           name="user"
-          initialValue={{ percent: "%" }}
         >
           <Form.Item
             name="name"

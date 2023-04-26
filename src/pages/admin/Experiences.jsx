@@ -221,7 +221,7 @@ const Experiences = () => {
               },
             ]}
           >
-            <Input placeholder="startDate" />
+            <Input placeholder="YY-MM-DD" />
           </Form.Item>
           <Form.Item
             name="endDate"
@@ -236,7 +236,7 @@ const Experiences = () => {
               },
             ]}
           >
-            <Input placeholder="endDate" />
+            <Input placeholder="YY-MM-DD" />
           </Form.Item>
         </Form>
       </Modal>
