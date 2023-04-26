@@ -7,7 +7,7 @@ import {
   Users,
 } from "../pages/admin";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
-import { GrUserSettings } from "react-icons/gr";
+import { RiUserSettingsLine } from "react-icons/ri";
 import { BsDiagram3Fill, BsJournalPlus } from "react-icons/bs";
 import { TbMessages } from "react-icons/tb";
 import { GiSkills } from "react-icons/gi";
@@ -23,7 +23,7 @@ const routes = [
   {
     url: "users",
     page: Users,
-    icon: <GrUserSettings />,
+    icon: <RiUserSettingsLine />,
     label: "Users",
   },
   {
