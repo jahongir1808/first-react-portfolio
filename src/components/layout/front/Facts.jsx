@@ -59,7 +59,7 @@ const Facts = () => {
               </i>
               <span className="counterSmile">0</span>
               <p>
-                <strong>Happy Clients</strong> consequuntur quae
+                <strong>Happy Clients </strong>achieve that
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ const Facts = () => {
               </i>
               <span className="counterJournal">0</span>
               <p>
-                <strong>Projects</strong> adipisci atque cum quia aut
+                <strong>Projects</strong> get and when because or
               </p>
             </div>
           </div>
@@ -91,7 +91,7 @@ const Facts = () => {
               </i>
               <span className="counterHeadset">0</span>
               <p>
-                <strong>Hours Of Support</strong> aut commodi quaerat
+                <strong>Hours Of Support</strong> or seek advantage
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@ const Facts = () => {
               </i>
               <span className="counterPeople">0</span>
               <p>
-                <strong>Hard Workers</strong> rerum asperiores dolor
+                <strong>Hard Workers</strong> the harsher pain of things
               </p>
             </div>
           </div>

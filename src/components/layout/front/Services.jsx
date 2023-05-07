@@ -16,10 +16,11 @@ const Services = () => {
         <div className="section-title">
           <h2>Services</h2>
           <p>
-            Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
-            aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
-            quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-            fugiat sit in iste officiis commodi quidem hic quas.
+            It takes great pains to benefit. His needs result from something
+            that actually drives him away. Let them be what they want. Anyone
+            whom anyone desires. And no one who hinders receives the others.
+            Because he should flee from the offices of convenience which he has
+            here.
           </p>
         </div>
 

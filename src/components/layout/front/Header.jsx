@@ -11,14 +11,22 @@ import {
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { BiUser, BiServer } from "react-icons/bi";
 import { TbNotebook } from "react-icons/tb";
+import { useLocation } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
+  const location = useLocation("#about");
   const showNav = () => {
     setActiveNav(!activeNav);
   };
-  const closeNav = () => {};
+  const [activeLink, setActiveLink] = useState("");
+
+  function handleClick(event) {
+    console.log(event);
+    event.preventDefault();
+    setActiveLink(event.target.getAttribute("href"));
+  }
   return (
     <div
       data-aos-duration="1000"
@@ -36,7 +44,7 @@ const Header = () => {
           <div className="profile">
             <img src={sideImg} alt="" className="img-fluid rounded-circle" />
             <h1 className="text-light">
-              <a href="index.html">Alex Smith</a>
+              <a href="index.html">Axtamov Jahongir</a>
             </h1>
             <div className="social-links mt-3 text-center">
               <a href="#" className="twitter">
@@ -70,7 +78,10 @@ const Header = () => {
           <nav id="navbar" className="nav-menu navbar">
             <ul>
               <li>
-                <a href="#hero" className="nav-link scrollto active">
+                <a
+                  className={location.hash === "#hero" ? "active" : ""}
+                  href="#hero"
+                >
                   <i>
                     <AiOutlineHome />
                   </i>
@@ -78,7 +89,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#about" className="nav-link scrollto">
+                <a
+                  className={location.hash === "#about" ? "active" : ""}
+                  href="#about"
+                >
                   <i>
                     <BiUser />
                   </i>
@@ -86,7 +100,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#resume" className="nav-link scrollto">
+                <a
+                  className={location.hash === "#resume" ? "active" : ""}
+                  href="#resume"
+                >
                   <i>
                     <AiOutlineFile />
                   </i>
@@ -94,7 +111,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#portfolio" className="nav-link scrollto">
+                <a
+                  className={location.hash === "#portfolio" ? "active" : ""}
+                  href="#portfolio"
+                >
                   <i>
                     <TbNotebook />
                   </i>
@@ -102,7 +122,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#services" className="nav-link scrollto">
+                <a
+                  className={location.hash === "#services" ? "active" : ""}
+                  href="#services"
+                >
                   <i>
                     <BiServer />
                   </i>
@@ -110,7 +133,10 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#contact" className="nav-link scrollto">
+                <a
+                  className={location.hash === "#contact" ? "active" : ""}
+                  href="#contact"
+                >
                   <i>
                     <AiOutlineMail />
                   </i>

@@ -9,10 +9,11 @@ const About = () => {
         <div className="section-title">
           <h2>About</h2>
           <p>
-            Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
-            aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
-            quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
-            fugiat sit in iste officiis commodi quidem hic quas.
+            It takes great pains to benefit. His needs result from something
+            that actually drives him away. Let them be what they want. Anyone
+            whom anyone desires. And no one who hinders receives the others.
+            Because he should flee from the offices of convenience which he has
+            here.
           </p>
         </div>
 
@@ -21,61 +22,62 @@ const About = () => {
             <img src={aboutImg} className="img-fluid" alt="" />
           </div>
           <div className="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>UI/UX Designer &amp; Web Developer.</h3>
+            <h3>Frontend - Web Developer.</h3>
             <p className="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              My name is Jahongir. I am a future front-end developer. I want to
+              be one of the best programmers
             </p>
             <div className="row">
               <div className="col-lg-6">
                 <ul>
                   <li>
                     <i className="bi bi-chevron-right"></i>{" "}
-                    <strong>Birthday:</strong> <span>1 May 1995</span>
+                    <strong>Birthday:</strong> <span>18 August 2004</span>
                   </li>
                   <li>
                     <i className="bi bi-chevron-right"></i>{" "}
                     <strong>Website:</strong> <span>www.example.com</span>
                   </li>
                   <li>
-                    <i className="bi bi-chevron-right"></i> <strong>Phone:</strong>{" "}
-                    <span>+123 456 7890</span>
+                    <i className="bi bi-chevron-right"></i>{" "}
+                    <strong>Phone:</strong> <span>+998 91 990-18-08</span>
                   </li>
                   <li>
-                    <i className="bi bi-chevron-right"></i> <strong>City:</strong>{" "}
-                    <span>New York, USA</span>
+                    <i className="bi bi-chevron-right"></i>{" "}
+                    <strong>City:</strong> <span>Uzbekistan, Navoiy</span>
                   </li>
                 </ul>
               </div>
               <div className="col-lg-6">
                 <ul>
                   <li>
-                    <i className="bi bi-chevron-right"></i> <strong>Age:</strong>{" "}
-                    <span>30</span>
-                  </li>
-                  <li>
-                    <i className="bi bi-chevron-right"></i> <strong>Degree:</strong>{" "}
-                    <span>Master</span>
+                    <i className="bi bi-chevron-right"></i>{" "}
+                    <strong>Age:</strong> <span>18</span>
                   </li>
                   <li>
                     <i className="bi bi-chevron-right"></i>{" "}
-                    <strong>PhEmailone:</strong> <span>email@example.com</span>
+                    <strong>Degree:</strong> <span>Junior</span>
                   </li>
                   <li>
                     <i className="bi bi-chevron-right"></i>{" "}
-                    <strong>Freelance:</strong> <span>Available</span>
+                    <strong>PhEmailone:</strong>{" "}
+                    <span>jahongir.developer18@gmail.com</span>
+                  </li>
+                  <li>
+                    <i className="bi bi-chevron-right"></i>{" "}
+                    <strong>Freelance:</strong> <span>Not available</span>
                   </li>
                 </ul>
               </div>
             </div>
             <p>
-              Officiis eligendi itaque labore et dolorum mollitia officiis optio
-              vero. Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor
-              incidunt officia tempore. Et eius omnis. Cupiditate ut dicta
-              maxime officiis quidem quia. Sed et consectetur qui quia
-              repellendus itaque neque. Aliquid amet quidem ut quaerat
-              cupiditate. Ab et eum qui repellendus omnis culpa magni laudantium
-              dolores.
+              Therefore, choosing the services of labor and pains is the choice
+              of the services. Anyone can get everything and that. There are no
+              prosecutors in charge of the services at the time. And all his
+              Because of desire, as said, most of the offices. But those who
+              will be pursued will not be repulsed. Something really interesting
+              to look for with desire. And from him who is repulsed by all the
+              guilt of great praise the pains.
             </p>
           </div>
         </div>

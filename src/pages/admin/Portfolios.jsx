@@ -14,33 +14,26 @@ const { confirm } = Modal;
 const Portfolios = () => {
   const columns = [
     {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
+      title: "Url",
+      dataIndex: "url",
+      key: "url",
     },
     {
-      title: "Username",
-      dataIndex: "username",
-      key: "username",
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
+      title: "Photo",
+      dataIndex: "photo",
+      key: "photo",
     },
     {
       title: "Actions",
       width: 200,
       render: ({ _id }) => (
         <>
-          <Button type="primary" onClick={() => editUser(_id)}>
-            <FaUserEdit />
-          </Button>
+          <input type="file" />
           <Button type="primary" danger onClick={() => deleteUser(_id)}>
             <AiOutlineUserDelete />
           </Button>

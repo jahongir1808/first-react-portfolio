@@ -8,12 +8,7 @@ const Hero = () => {
 
   useEffect(() => {
     const typed = new Typed(el.current, {
-      strings: [
-        "Designer",
-        "Developer",
-        "Freelancer",
-        "Photographer",
-      ],
+      strings: ["Frontend Developer", "Junior Developer", "Student"],
       startDelay: 300,
       typeSpeed: 100,
       backSpeed: 100,
@@ -31,7 +26,7 @@ const Hero = () => {
       className="section d-flex flex-column justify-content-center align-items-center"
     >
       <div className="hero-container" data-aos="fade-in">
-        <h1>Alex Smith</h1>
+        <h1>Axtamov Jahongir</h1>
         <p>
           I'm <span ref={el}></span>
         </p>
