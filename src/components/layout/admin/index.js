@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineLogout } from "react-icons/hi";
 import { TOKEN } from "../../../const";
 import { adminRoutes } from "../../../const/menus";
+// import adminLogo from "../../../assets/img/adminLogo.png";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import "./admin.scss";
 
@@ -21,7 +22,7 @@ const AdminLayout = ({ children }) => {
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo" />
+        <div className="logo">Admin Panel</div>
         <Menu
           theme="dark"
           mode="inline"
@@ -32,22 +33,12 @@ const AdminLayout = ({ children }) => {
               icon: <Link to={"/" + route.url}>{route.icon}</Link>,
               label: route.label,
             })),
-            {
-              icon: (
-                <Button
-                  onClick={logout}
-                  type="primary"
-                  icon={<HiOutlineLogout />}
-                >
-                  Logout
-                </Button>
-              ),
-            },
           ]}
         />
       </Sider>
       <Layout className="site-layout">
         <Header
+          className="antd-header"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -60,6 +51,10 @@ const AdminLayout = ({ children }) => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
+          <button className="logoutBtn" onClick={logout}>
+            <HiOutlineLogout className="logoutSvg" />
+            Logout
+          </button>
         </Header>
         <Content
           style={{

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import sideImg from "../../../assets/img/profile-img.jpg";
 import {
   AiOutlineTwitter,
@@ -16,7 +16,13 @@ import "./Header.css";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState(false);
-  const location = useLocation("#about");
+  let { hash } = useLocation();
+  console.log(hash);
+  useEffect(() => {
+    if (!hash) {
+      hash = "";
+    }
+  }, [hash]);
   const showNav = () => {
     setActiveNav(!activeNav);
   };
@@ -78,10 +84,7 @@ const Header = () => {
           <nav id="navbar" className="nav-menu navbar">
             <ul>
               <li>
-                <a
-                  className={location.hash === "#hero" ? "active" : ""}
-                  href="#hero"
-                >
+                <a className={hash === "" ? "active" : ""} href="">
                   <i>
                     <AiOutlineHome />
                   </i>
@@ -89,10 +92,7 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a
-                  className={location.hash === "#about" ? "active" : ""}
-                  href="#about"
-                >
+                <a className={hash === "#about" ? "active" : ""} href="#about">
                   <i>
                     <BiUser />
                   </i>
@@ -101,7 +101,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  className={location.hash === "#resume" ? "active" : ""}
+                  className={hash === "#resume" ? "active" : ""}
                   href="#resume"
                 >
                   <i>
@@ -112,7 +112,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  className={location.hash === "#portfolio" ? "active" : ""}
+                  className={hash === "#portfolio" ? "active" : ""}
                   href="#portfolio"
                 >
                   <i>
@@ -123,7 +123,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  className={location.hash === "#services" ? "active" : ""}
+                  className={hash === "#services" ? "active" : ""}
                   href="#services"
                 >
                   <i>
@@ -134,7 +134,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  className={location.hash === "#contact" ? "active" : ""}
+                  className={hash === "#contact" ? "active" : ""}
                   href="#contact"
                 >
                   <i>
