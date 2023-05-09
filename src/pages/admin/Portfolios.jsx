@@ -1,17 +1,32 @@
-import { Button, Form, Input, Modal, Select, Table } from "antd";
+import { Button, Form, Input, Modal, Select, Table, Upload } from "antd";
 import React, { useState } from "react";
-import { deleteData, getData, putData, sendData } from "../../server/common";
-import { USER_ROLES } from "../../const";
-import { ExclamationCircleFilled } from "@ant-design/icons";
+import {
+  deleteData,
+  getData,
+  putData,
+  sendData,
+  sendImageData,
+} from "../../server/common";
+import { ExclamationCircleFilled, InboxOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
-import { FaUserEdit } from "react-icons/fa";
 import { AiOutlineUserDelete, AiOutlineUserAdd } from "react-icons/ai";
 import { ROLE, USER_ID } from "../../utils";
 import { useFetch } from "../../hook";
+import { IMAGE_URL } from "../../const";
 
 const { confirm } = Modal;
 
 const Portfolios = () => {
+  const [save, setSave] = useState("");
+  const [saveUrl, setSaveUrl] = useState("");
+  const {
+    data: portfolios,
+    loading,
+    recall: getPortfolios,
+  } = useFetch(`portfolios${ROLE === "client" ? `?user[in]=${USER_ID}` : ""}`);
+  const [form] = Form.useForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
   const columns = [
     {
       title: "Name",
@@ -22,11 +37,24 @@ const Portfolios = () => {
       title: "Url",
       dataIndex: "url",
       key: "url",
+      render: (Url) => (
+        <a href={Url} target="_blank">
+          Link
+        </a>
+      ),
     },
     {
       title: "Photo",
       dataIndex: "photo",
       key: "photo",
+      render: (photoUrl) => (
+        <img
+          src={IMAGE_URL + photoUrl._id + "." + photoUrl.name.split(".")[1]}
+          alt={photoUrl.name}
+          width="50px"
+          height="50px"
+        />
+      ),
     },
     {
       title: "Actions",
@@ -41,24 +69,24 @@ const Portfolios = () => {
       ),
     },
   ];
-  const {
-    data: portfolios,
-    loading,
-    recall: getPortfolios,
-  } = useFetch(`portfolios${ROLE === "client" ? `?user[in]=${USER_ID}` : ""}`);
-  const [form] = Form.useForm();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
+  const normFile = (e) => {
+    const form = new FormData();
+    form.append("file", e.fileList[0].originFileObj);
+    sendImageData("upload", form).then((res) => {
+      setSave(res);
+    });
+  };
+
   const handleOk = () => {
     form.validateFields().then((values) => {
-      delete values.confirm;
+      values["photo"] = `${save.data._id}`;
+      setSaveUrl(values.url);
       if (selected) {
-        values.password || delete values.password;
         putData(`portfolios/${selected}`, values).then((data) => {
           getPortfolios();
           setIsModalOpen(false);
@@ -86,13 +114,11 @@ const Portfolios = () => {
     showModal();
     setSelected(id);
     getData(`portfolios/${id}`).then((res) => {
-      console.log(res);
       form.setFieldsValue(res.data);
     });
   }
 
   function deleteUser(id) {
-    console.log(id);
     confirm({
       title: "Do you Want to delete these items?",
       icon: <ExclamationCircleFilled />,
@@ -131,112 +157,56 @@ const Portfolios = () => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText={selected ? "Add Portfolio" : "Add Portfolio"}
+        okText={selected ? "Add Portfolio" : "Save Portfolio"}
       >
         <Form
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
           form={form}
           name="user"
-          initialValues={{ role: "client" }}
         >
           <Form.Item
-            name="firstName"
-            label="First Name"
+            name="name"
+            label="name"
             rules={[
               {
-                message: "The input is not valid First Name!",
+                message: "The input is not valid Name!",
               },
               {
                 required: true,
-                message: "Please input your Last Name!",
+                message: "Please input your Name!",
               },
             ]}
           >
-            <Input placeholder="First Name" />
+            <Input placeholder="Name" />
           </Form.Item>
           <Form.Item
-            name="lastName"
-            label="Last Name"
+            name="url"
+            label="URL"
             rules={[
-              {
-                message: "The input is not valid Last Name!",
-              },
-              {
-                required: true,
-                message: "Please input your Last Name!",
-              },
+              { required: true },
+              { type: "url", warningOnly: true },
+              { type: "string", min: 6 },
             ]}
           >
-            <Input placeholder="Last Name" />
+            <Input placeholder="Url" />
           </Form.Item>
-          <Form.Item
-            name="username"
-            label="User Name"
-            rules={[
-              {
-                message: "The input is not valid User Name!",
-              },
-              {
-                required: true,
-                message: "Please input your User Name!",
-              },
-            ]}
-          >
-            <Input placeholder="User Name" />
-          </Form.Item>
-          <Form.Item
-            name="role"
-            label="Role"
-            rules={[
-              {
-                required: true,
-                message: "Please input your role !",
-              },
-            ]}
-          >
-            <Select
-              options={USER_ROLES.map((role) => ({ label: role, value: role }))}
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="Password"
-            rules={[
-              {
-                required: selected ? false : true,
-                message: "Please input your password!",
-              },
-            ]}
-            hasFeedback
-          >
-            <Input.Password placeholder="Password" />
-          </Form.Item>
-          <Form.Item
-            name="confirm"
-            label="Confirm Password"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-              {
-                required: selected ? false : true,
-                message: "Please confirm your password!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password placeholder="Confirm Password" />
+          <Form.Item label="Dragger">
+            <Form.Item
+              name="photo"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              noStyle
+            >
+              <Upload.Dragger multiple>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Нажмите или перетащите файлы в эту область для загрузки
+                </p>
+              </Upload.Dragger>
+            </Form.Item>
           </Form.Item>
         </Form>
       </Modal>
