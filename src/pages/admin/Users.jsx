@@ -219,7 +219,7 @@ const Users = () => {
       <Tabs ActiveKey={selected} items={items} onChange={onChangeTab} />
       <Modal
         title="User"
-        open={isModalOpen}  
+        open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         okText={selected ? "Save User" : "Add User"}
@@ -287,7 +287,11 @@ const Users = () => {
             ]}
           >
             <Select
-              options={USER_ROLES.map((role) => ({ label: role, value: role }))}
+              options={USER_ROLES.map((role, i) => ({
+                label: role,
+                value: role,
+                key: i,
+              }))}
             />
           </Form.Item>
           <Form.Item

@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal, Select, Table, Upload } from "antd";
+import { Button, Form, Input, Modal, Table, Upload } from "antd";
 import React, { useState } from "react";
 import {
   deleteData,
@@ -9,21 +9,27 @@ import {
 } from "../../server/common";
 import { ExclamationCircleFilled, InboxOutlined } from "@ant-design/icons";
 import { toast } from "react-toastify";
-import { AiOutlineUserDelete, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineUserAdd } from "react-icons/ai";
 import { ROLE, USER_ID } from "../../utils";
 import { useFetch } from "../../hook";
 import { IMAGE_URL } from "../../const";
+import { MdEditDocument, MdFolderDelete } from "react-icons/md";
 
 const { confirm } = Modal;
 
 const Portfolios = () => {
+  const [current, setCurrentPage] = useState(1);
   const [save, setSave] = useState("");
-  const [saveUrl, setSaveUrl] = useState("");
   const {
     data: portfolios,
     loading,
+    total,
     recall: getPortfolios,
-  } = useFetch(`portfolios${ROLE === "client" ? `?user[in]=${USER_ID}` : ""}`);
+  } = useFetch(
+    `portfolios${
+      ROLE === "client" ? `?user[in]=${USER_ID}` : ""
+    }/?page=${current}&limit=5`
+  );
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -37,18 +43,20 @@ const Portfolios = () => {
       title: "Url",
       dataIndex: "url",
       key: "url",
-      render: (Url) => (
-        <a href={Url} target="_blank">
-          Link
+      render: (Url, { name }) => (
+        <a href={Url} target="_blank" rel="noreferrer">
+          {Url.split("/")[2].split(".")[0].split("-").slice(0, 2).join("-")}
         </a>
       ),
     },
     {
       title: "Photo",
       dataIndex: "photo",
+      width: 400,
       key: "photo",
       render: (photoUrl) => (
         <img
+          className="w-50 h-50"
           src={IMAGE_URL + photoUrl._id + "." + photoUrl.name.split(".")[1]}
           alt={photoUrl.name}
           width="50px"
@@ -59,13 +67,23 @@ const Portfolios = () => {
     {
       title: "Actions",
       width: 200,
-      render: ({ _id }) => (
-        <>
-          <input type="file" />
-          <Button type="primary" danger onClick={() => deleteUser(_id)}>
-            <AiOutlineUserDelete />
+      render: ({ _id, name }) => (
+        <div className="d-flex gap-2">
+          <Button
+            type="primary"
+            primary
+            onClick={() => editPortfolio(_id, name)}
+          >
+            <MdEditDocument />
           </Button>
-        </>
+          <Button
+            type="primary"
+            danger
+            onClick={() => deletePortfolio(_id, name)}
+          >
+            <MdFolderDelete />
+          </Button>
+        </div>
       ),
     },
   ];
@@ -85,7 +103,6 @@ const Portfolios = () => {
   const handleOk = () => {
     form.validateFields().then((values) => {
       values["photo"] = `${save.data._id}`;
-      setSaveUrl(values.url);
       if (selected) {
         putData(`portfolios/${selected}`, values).then((data) => {
           getPortfolios();
@@ -103,35 +120,31 @@ const Portfolios = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
   const openFormModal = () => {
     showModal();
     setSelected(null);
     form.resetFields();
   };
-
-  function editUser(id) {
+  function editPortfolio(id) {
     showModal();
     setSelected(id);
     getData(`portfolios/${id}`).then((res) => {
       form.setFieldsValue(res.data);
     });
   }
-
-  function deleteUser(id) {
+  function deletePortfolio(id, name) {
     confirm({
-      title: "Do you Want to delete these items?",
+      title: `Do you Want to delete ${name}?`,
       icon: <ExclamationCircleFilled />,
       content: "Some descriptions",
       onOk() {
         deleteData(`portfolios/${id}`).then((res) => {
-          toast.success(`User ${id} deleted successfully !`);
+          toast.success(`Portfolio ${name} deleted successfully !`);
           getPortfolios();
         });
       },
     });
   }
-
   return (
     <>
       <Table
@@ -151,19 +164,25 @@ const Portfolios = () => {
         columns={columns}
         loading={loading}
         scroll={{ x: 600 }}
+        pagination={{
+          current,
+          total,
+          pageSize: 5,
+          onChange: (key) => setCurrentPage(key),
+        }}
       />
       <Modal
         title="Portfolio"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText={selected ? "Add Portfolio" : "Save Portfolio"}
+        okText={selected ? "Save Portfolio" : "Add Portfolio"}
       >
         <Form
           labelCol={{ span: 24 }}
           wrapperCol={{ span: 24 }}
           form={form}
-          name="user"
+          name="portfolio"
         >
           <Form.Item
             name="name"

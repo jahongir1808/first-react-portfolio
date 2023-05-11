@@ -1,10 +1,9 @@
-import { Button, Layout, Menu, theme } from "antd";
+import { Layout, Menu, theme } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineLogout } from "react-icons/hi";
 import { TOKEN } from "../../../const";
 import { adminRoutes } from "../../../const/menus";
-// import adminLogo from "../../../assets/img/adminLogo.png";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import "./admin.scss";
 

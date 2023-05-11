@@ -26,13 +26,6 @@ const Header = () => {
   const showNav = () => {
     setActiveNav(!activeNav);
   };
-  const [activeLink, setActiveLink] = useState("");
-
-  function handleClick(event) {
-    console.log(event);
-    event.preventDefault();
-    setActiveLink(event.target.getAttribute("href"));
-  }
   return (
     <div
       data-aos-duration="1000"
@@ -80,11 +73,15 @@ const Header = () => {
               </a>
             </div>
           </div>
-
           <nav id="navbar" className="nav-menu navbar">
             <ul>
               <li>
-                <a className={hash === "" ? "active" : ""} href="">
+                <a
+                  className={
+                    hash === "" ? "active" : hash === "#hero" ? "active" : ""
+                  }
+                  href="#hero"
+                >
                   <i>
                     <AiOutlineHome />
                   </i>
