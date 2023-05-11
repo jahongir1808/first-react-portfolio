@@ -43,7 +43,7 @@ const Portfolios = () => {
       title: "Url",
       dataIndex: "url",
       key: "url",
-      render: (Url, { name }) => (
+      render: (Url) => (
         <a href={Url} target="_blank" rel="noreferrer">
           {Url.split("/")[2].split(".")[0].split("-").slice(0, 2).join("-")}
         </a>

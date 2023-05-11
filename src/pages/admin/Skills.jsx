@@ -20,6 +20,7 @@ const Skills = () => {
       title: "Percent",
       dataIndex: "percent",
       key: "percent",
+      render: (percent) => <p>{percent} %</p>,
     },
     {
       title: "Actions",
