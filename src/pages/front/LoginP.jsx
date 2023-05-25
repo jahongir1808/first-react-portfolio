@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Login.scss";
 import { sendData } from "../../server/common";
@@ -8,18 +8,21 @@ import "react-toastify/dist/ReactToastify.css";
 import Links from "./Links";
 
 const LoginP = () => {
+  const [disable, setDisable] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (value) => {
+    setDisable(true);
     sendData("auth/login", value)
       .then((res) => {
         console.log(res.data);
         localStorage.setItem(TOKEN, res.data.token);
         localStorage.setItem(USER, JSON.stringify(res.data.user));
         console.log(res.data.user);
+
         if (res.data.user.role !== "user") {
           window.location.href = "/dashboard";
           toast.success("Welcome! You have successfully");
@@ -35,7 +38,7 @@ const LoginP = () => {
     <div id="login">
       <Links />
       <div className="login">
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form">
           <h1>Login</h1>
           <div className="txtField">
             <label htmlFor="username">Username</label>
@@ -55,7 +58,14 @@ const LoginP = () => {
             />
             <span>{errors.password?.message}</span>
           </div>
-          <button type="submit">Login</button>
+          <button
+            onClick={handleSubmit(onSubmit)}
+            className={disable ? "disabledTrue" : "disabledFalse"}
+            disabled={disable}
+            type="submit"
+          >
+            Login
+          </button>
         </form>
       </div>
     </div>

@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import sideImg from "../../../assets/img/profile-img.jpg";
-import {
-  AiOutlineTwitter,
-  AiOutlineInstagram,
-  AiFillSkype,
-  AiOutlineHome,
-  AiOutlineFile,
-  AiOutlineMail,
-} from "react-icons/ai";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { AiOutlineHome, AiOutlineFile, AiOutlineMail } from "react-icons/ai";
 import { BiUser, BiServer } from "react-icons/bi";
 import { TbNotebook } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
@@ -45,33 +37,6 @@ const Header = () => {
             <h1 className="text-light">
               <a href="index.html">Axtamov Jahongir</a>
             </h1>
-            <div className="social-links mt-3 text-center">
-              <a href="#" className="twitter">
-                <i>
-                  <AiOutlineTwitter />
-                </i>
-              </a>
-              <a href="#" className="facebook">
-                <i>
-                  <FaFacebookF />
-                </i>
-              </a>
-              <a href="#" className="instagram">
-                <i>
-                  <AiOutlineInstagram />
-                </i>
-              </a>
-              <a href="#" className="google-plus">
-                <i>
-                  <AiFillSkype />
-                </i>
-              </a>
-              <a href="#" className="linkedin">
-                <i>
-                  <FaLinkedinIn />
-                </i>
-              </a>
-            </div>
           </div>
           <nav id="navbar" className="nav-menu navbar">
             <ul>

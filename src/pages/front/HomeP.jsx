@@ -4,7 +4,6 @@ import {
   Backtop,
   Contact,
   Facts,
-  Footer,
   Header,
   Hero,
   Portfolio,
@@ -28,7 +27,6 @@ const HomeP = () => {
       <Services />
       <Testemonials />
       <Contact />
-      <Footer />
     </>
   );
 };
